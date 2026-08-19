@@ -351,13 +351,12 @@
     /* ═══ QR BUTTON + MODAL ═══ */
     .qr-btn {
       width:36px; height:36px; border-radius:9px;
-      background:rgba(255,255,255,0.92); border:1px solid rgba(255,255,255,0.3);
+      background:var(--glass); border:1px solid var(--glass-b);
       display:flex; align-items:center; justify-content:center;
-      cursor:pointer; font-size:19px; transition:all .18s;
-      flex-shrink:0; box-shadow:0 2px 8px rgba(0,0,0,0.25);
-      color:#071A38;
+      cursor:pointer; font-size:18px; transition:all .18s;
+      backdrop-filter:blur(8px); flex-shrink:0;
     }
-    .qr-btn:hover { background:#ffffff; transform:scale(1.07); box-shadow:0 4px 14px rgba(0,0,0,0.3); }
+    .qr-btn:hover { background:rgba(255,255,255,0.15); transform:scale(1.05); }
 
     .qr-modal {
       display:none; position:fixed; inset:0; z-index:999;
