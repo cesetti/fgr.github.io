@@ -53,7 +53,7 @@
     /* ═══ HERO ═══ */
     .hero {
       position:relative;
-      background: linear-gradient(160deg, #071A38 0%, #0A2342 40%, #0D2B50 70%, #071530 100%);
+      background: linear-gradient(150deg, #071A38 0%, #0C0B32 35%, #130D42 65%, #060B20 100%);
       padding-bottom:52px;
       overflow:hidden;
     }
@@ -271,19 +271,7 @@
       background:linear-gradient(135deg, var(--navy3) 0%, var(--navy2) 100%);
     }
 
-    /* ═══ QR ═══ */
-    .qr-card {
-      background:var(--card); border-radius:20px;
-      border:1px solid var(--border);
-      padding:24px; text-align:center;
-      box-shadow:0 2px 8px rgba(0,0,0,.05);
-    }
-    #qr-canvas {
-      display:inline-block; padding:10px; background:white;
-      border-radius:12px; border:1px solid var(--border); margin-bottom:14px;
-    }
-    .qr-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:4px;}
-    .qr-sub{font-size:11px;color:var(--soft);line-height:1.55;}
+
 
     /* ═══ FORM ═══ */
     .form-card {
@@ -359,6 +347,44 @@
       .pill.full{grid-column:span 1;}
       .frow{grid-template-columns:1fr;}
     }
+
+    /* ═══ QR BUTTON + MODAL ═══ */
+    .qr-btn {
+      width:36px; height:36px; border-radius:9px;
+      background:rgba(255,255,255,0.92); border:1px solid rgba(255,255,255,0.3);
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer; font-size:19px; transition:all .18s;
+      flex-shrink:0; box-shadow:0 2px 8px rgba(0,0,0,0.25);
+      color:#071A38;
+    }
+    .qr-btn:hover { background:#ffffff; transform:scale(1.07); box-shadow:0 4px 14px rgba(0,0,0,0.3); }
+
+    .qr-modal {
+      display:none; position:fixed; inset:0; z-index:999;
+      background:rgba(0,0,0,0.70); backdrop-filter:blur(6px);
+      align-items:center; justify-content:center;
+    }
+    .qr-modal.open { display:flex; }
+    .qr-box {
+      background:#fff; border-radius:20px;
+      padding:28px 24px 20px; text-align:center;
+      width:min(320px,90vw);
+      box-shadow:0 20px 60px rgba(0,0,0,0.40);
+      animation:popIn .25s ease;
+    }
+    @keyframes popIn {
+      from{opacity:0;transform:scale(0.88);}
+      to{opacity:1;transform:scale(1);}
+    }
+    #qr-canvas-modal { display:inline-block; padding:8px; background:white; border-radius:10px; border:1px solid #eee; margin-bottom:14px; }
+    .qr-modal-title { font-size:14px; font-weight:700; color:#0D1B2E; margin-bottom:4px; }
+    .qr-modal-sub   { font-size:11px; color:#4A5568; line-height:1.55; margin-bottom:16px; }
+    .qr-close {
+      width:100%; padding:12px;
+      background:#071A38; color:white;
+      border:none; border-radius:10px;
+      font-size:13px; font-weight:700; cursor:pointer;
+    }
   </style>
 </head>
 <body>
@@ -387,8 +413,13 @@
       </div>
       <span class="company-name">Cesetti Comunicaciones</span>
     </div>
-    <div class="avail-chip">
-      <div class="avail-dot"></div>Disponible
+    <div style="display:flex;align-items:center;gap:8px;">
+      <div class="avail-chip">
+        <div class="avail-dot"></div>Disponible
+      </div>
+      <div class="qr-btn" onclick="document.getElementById('qr-modal').classList.add('open')" title="Ver QR">
+        ▦
+      </div>
     </div>
   </div>
 
@@ -447,7 +478,7 @@
       <div class="svc">
         <div class="svc-ico">📻</div>
         <div>
-          <span class="svc-tag">CESETTI COMUNICACIONES · RADIOCOMUNICACIONES</span>
+          <span class="svc-tag">RADIOCOMUNICACIONES</span>
           <strong>Radios de Dos Vías · MOTOROLA SOLUTIONS</strong>
           <span>Comunicación de misión crítica para equipos operativos y seguridad</span>
         </div>
@@ -456,7 +487,7 @@
       <div class="svc">
         <div class="svc-ico">📡</div>
         <div>
-          <span class="svc-tag">CESETTI COMUNICACIONES · TELEMÁTICA Y VIDEOTELEMÁTICA</span>
+          <span class="svc-tag">TELEMÁTICA Y VIDEOTELEMÁTICA</span>
           <strong>Gestión inteligente de Flotas y Comportamiento de Conductores · GEOTAB</strong>
           <span>Gestión, rastreo, analítica de datos en tiempo real de Flotas y Conductores</span>
         </div>
@@ -465,7 +496,7 @@
       <div class="svc">
         <div class="svc-ico">🔗</div>
         <div>
-          <span class="svc-tag">CESETTI COMUNICACIONES · VIDEOVIGILANCIA INTELIGENTE Y DATOS</span>
+          <span class="svc-tag">VIDEOVIGILANCIA INTELIGENTE Y DATOS</span>
           <strong>Sistema de Video Vigilancia y Radio Enlace de Datos · AVIGILON Y CAMBIUM NETWORKS</strong>
           <span>Conectividad inalámbrica de alto rendimiento para infraestructura</span>
         </div>
@@ -479,16 +510,6 @@
     <a class="btn-save" href="./contact.vcf">
       ⬇ &nbsp;Guardar en Contactos
     </a>
-  </div>
-
-  <!-- QR -->
-  <div class="section">
-    <div class="sec-lbl">Código QR</div>
-    <div class="qr-card">
-      <div id="qr-canvas"></div>
-      <div class="qr-title">Escaneá para abrir mi tarjeta digital</div>
-      <div class="qr-sub">Apuntá la cámara de tu iPhone para<br/>ver mi tarjeta completa al instante.</div>
-    </div>
   </div>
 
   <!-- FORMULARIO -->
@@ -554,10 +575,10 @@
     window.addEventListener("load", () => navigator.serviceWorker.register("./sw.js").catch(()=>{}));
   }
 
-  new QRCode(document.getElementById("qr-canvas"), {
+  new QRCode(document.getElementById("qr-canvas-modal"), {
     text:"https://cesetti.github.io/fgr.github.io/",
-    width:200, height:200,
-    colorDark:"#0A2342", colorLight:"#ffffff",
+    width:220, height:220,
+    colorDark:"#071A38", colorLight:"#ffffff",
     correctLevel:QRCode.CorrectLevel.M
   });
 
@@ -595,5 +616,15 @@
     }
   }
 </script>
+
+<!-- QR MODAL -->
+<div class="qr-modal" id="qr-modal" onclick="if(event.target===this)this.classList.remove('open')">
+  <div class="qr-box">
+    <div id="qr-canvas-modal"></div>
+    <div class="qr-modal-title">Escaneá para abrir mi tarjeta</div>
+    <div class="qr-modal-sub">Apuntá la cámara de tu teléfono<br/>para ver mi tarjeta digital completa.</div>
+    <button class="qr-close" onclick="document.getElementById('qr-modal').classList.remove('open')">Cerrar</button>
+  </div>
+</div>
 </body>
 </html>
